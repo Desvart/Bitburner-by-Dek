@@ -1,0 +1,15 @@
+{
+   "files": [],
+   "exclude": ["../dist/"],
+   "references": [
+      { "path": "./build" },
+      { "path": "./mod-utils" },
+      { "path": "./mod-network" },
+      { "path": "./mod-contracts" },
+      //        { "path": "./mod-hacking" },
+      //        { "path": "./mod-hacknet" },
+      //        { "path": "./mod-infiltration" },
+      //        { "path": "./mod-stock-market" },
+      //        { "path": "./mod-corporation" },
+   ]
+}

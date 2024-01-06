@@ -286,8 +286,9 @@ class SolverFindLargestPrimeNumber implements ISolver {
    /* A prime factor is a factor that is a prime number. What is the largest prime factor of 251187194?
     */
 
-   solve(input: number): number {
-      let largestFactor = 1;
+   solve(data: number): number {
+      let input: number = data;
+      let largestFactor: number = 1;
 
       // Remove factors of 2
       while (input % 2 === 0) {
@@ -296,8 +297,8 @@ class SolverFindLargestPrimeNumber implements ISolver {
       }
 
       // Check odd factors
-      let factor = 3;
-      const maxFactor = Math.sqrt(input);
+      let factor: number = 3;
+      const maxFactor: number = Math.sqrt(input);
       while (input > 1 && factor <= maxFactor) {
          while (input % factor === 0) {
             largestFactor = factor;
@@ -358,15 +359,21 @@ class SolverTotalWaysToSum implements ISolver {
       const numbers: number[] = input[1];
 
       // Create a 1D array for dynamic programming (dp)
-      let dp: number[] = new Array(n + 1).fill(0);
+      const dp: number[] = new Array(n + 1).fill(0);
       dp[0] = 1; // Base case: one way to sum up to 0
 
       // Fill the dynamic programming table
-      for (let num of numbers) {
+      // for (let num of numbers) {
+      //    for (let i = num; i <= n; i++) {
+      //       dp[i] += dp[i - num];
+      //    }
+      // }
+
+      numbers.forEach((num: number): void => {
          for (let i = num; i <= n; i++) {
             dp[i] += dp[i - num];
          }
-      }
+      });
 
       // The number of ways to write 'input' using numbers up to 'input' or numbers in the given set
       return dp[n];
@@ -397,32 +404,47 @@ class SolverSpiralizeMatrix implements ISolver {
       return result;
    }
 
-   private addFirstElementOfEachRowInReverseOrder(input: number[][], result: number[]) {
-      let firstElements: number[] = [];
-      for (let i = 0; i < input.length; i++) {
-         let row = input[i];
+   private addFirstElementOfEachRowInReverseOrder(input: number[][], result: number[]): number[] {
+      const firstElements: number[] = [];
+      // for (let i = 0; i < input.length; i++) {
+      //    let row = input[i];
+      //    if (row.length) {
+      //       firstElements.push(row.shift() as number);
+      //    }
+      // }
+
+      input.forEach((row: number[]): void => {
          if (row.length) {
             firstElements.push(row.shift() as number);
          }
-      }
-      return result.concat(firstElements.reverse());
+      });
+      firstElements.reverse();
+      return result.concat(firstElements);
    }
 
-   private addTheLastRowInReverseOrder(input: number[][], result: number[]) {
+   private addTheLastRowInReverseOrder(input: number[][], result: number[]): number[] {
+      let output: number[] = result;
       if (input.length) {
-         let lastRow = input.pop() as number[];
-         result = result.concat(lastRow.reverse());
+         const lastRow: number[] = input.pop() as number[];
+         lastRow.reverse();
+         output = result.concat(lastRow);
       }
-      return result;
+      return output;
    }
 
-   private addTheLastElementOfEachRow(input: number[][], result: number[]) {
-      for (let i = 0; i < input.length; i++) {
-         let row = input[i];
+   private addTheLastElementOfEachRow(input: number[][], result: number[]): number[] {
+      // for (let i = 0; i < input.length; i++) {
+      //    let row = input[i];
+      //    if (row.length) {
+      //       result.push(row.pop() as number);
+      //    }
+      // }
+
+      input.forEach((row: number[]): void => {
          if (row.length) {
             result.push(row.pop() as number);
          }
-      }
+      });
       return result;
    }
 
@@ -501,7 +523,7 @@ class SolverArrayJumpingGameII implements ISolver {
          // If we've reached the end of the current jump,
          // increase the jump count and update the current end
          if (i === currentEnd) {
-            jumps++;
+            jumps += 1;
             currentEnd = farthest;
 
             // If the current end is still at or before the current position,
@@ -600,8 +622,8 @@ class SolverGenerateIpAddresses implements ISolver {
 
 class SolverAlgorithmicStockTrader implements ISolver {
    solve(input: [number, number[]]): number {
-      const maxTransactions = input[0];
-      const prices = input[1];
+      const maxTransactions: number = input[0];
+      const prices: number[] = input[1];
 
       if (prices.length < 2) {
          // Not enough prices to transact. Maximum profit is 0.
@@ -618,16 +640,23 @@ class SolverAlgorithmicStockTrader implements ISolver {
          // More transactions available than can be used. Maximum profit is ${sum}
       }
 
-      const rele = Array<number>(maxTransactions + 1).fill(0);
-      const hold = Array<number>(maxTransactions + 1).fill(Number.MIN_SAFE_INTEGER);
+      const rele: number[] = Array<number>(maxTransactions + 1).fill(0);
+      const hold: number[] = Array<number>(maxTransactions + 1).fill(Number.MIN_SAFE_INTEGER);
 
-      for (let day = 0; day < prices.length; day++) {
-         const price = prices[day];
+      // for (let day = 0; day < prices.length; day++) {
+      //    const price = prices[day];
+      //    for (let i = maxTransactions; i > 0; i--) {
+      //       rele[i] = Math.max(rele[i], hold[i] + price);
+      //       hold[i] = Math.max(hold[i], rele[i - 1] - price);
+      //    }
+      // }
+
+      prices.forEach((price: number): void => {
          for (let i = maxTransactions; i > 0; i--) {
             rele[i] = Math.max(rele[i], hold[i] + price);
             hold[i] = Math.max(hold[i], rele[i - 1] - price);
          }
-      }
+      });
 
       return rele[maxTransactions];
    }
@@ -673,8 +702,8 @@ class SolverUniquePathInAGrid implements ISolver {
       const rows = input.length;
       const cols = input[0].length;
 
-      const grid = this.initializeGrid(rows, cols);
-      this.calculatePaths(input, grid, rows, cols);
+      const gridInit: number[][] = this.initializeGrid(rows, cols);
+      const grid: number[][] = this.calculatePaths(input, gridInit, rows, cols);
 
       return grid[0][0];
    }
@@ -687,12 +716,14 @@ class SolverUniquePathInAGrid implements ISolver {
       return grid;
    }
 
-   private calculatePaths(input: number[][], grid: number[][], rows: number, cols: number): void {
+   private calculatePaths(input: number[][], gridInit: number[][], rows: number, cols: number): number[][] {
+      const grid: number[][] = gridInit;
       for (let y = rows - 1; y >= 0; y--) {
          for (let x = cols - 1; x >= 0; x--) {
             grid[y][x] = this.calculateCellValue(input, grid, y, x, rows, cols);
          }
       }
+      return grid;
    }
 
    private calculateCellValue(
@@ -774,7 +805,26 @@ class SolverShortestPathInAGrid implements ISolver {
             return path;
          }
 
-         for (const [dr, dc, dir] of directions) {
+         // for (const [dr, dc, dir] of directions) {
+         //    const newRow = row + dr;
+         //    const newCol = col + dc;
+         //    const newPath = path + dir;
+         //    const pos = `${newRow},${newCol}`;
+         //
+         //    if (
+         //       newRow >= 0 &&
+         //       newRow < rows &&
+         //       newCol >= 0 &&
+         //       newCol < cols &&
+         //       input[newRow][newCol] === 0 &&
+         //       !seen.has(pos)
+         //    ) {
+         //       queue.push([newRow, newCol, newPath]);
+         //       seen.add(pos);
+         //    }
+         // }
+
+         directions.forEach(([dr, dc, dir]: [number, number, string]): void => {
             const newRow = row + dr;
             const newCol = col + dc;
             const newPath = path + dir;
@@ -791,7 +841,7 @@ class SolverShortestPathInAGrid implements ISolver {
                queue.push([newRow, newCol, newPath]);
                seen.add(pos);
             }
-         }
+         });
       }
 
       return '';
@@ -815,15 +865,15 @@ class SolverSanitizeParenthesesInExpression implements ISolver {
       this.results = new Set<string>();
 
       // Count the number of misplaced left and right parentheses
-      let lremove = 0,
-         rremove = 0;
-      for (let char of input) {
-         if (char === '(') lremove++;
+      let lremove = 0;
+      let rremove = 0;
+      input.split('').forEach((char) => {
+         if (char === '(') lremove += 1;
          else if (char === ')') {
-            if (lremove > 0) lremove--;
-            else rremove++;
+            if (lremove > 0) lremove -= 1;
+            else rremove += 1;
          }
-      }
+      });
 
       this.backtrack(0, lremove, rremove, input);
       return Array.from(this.results);
@@ -831,9 +881,10 @@ class SolverSanitizeParenthesesInExpression implements ISolver {
 
    isValid(str: string): boolean {
       let balance = 0;
-      for (let char of str) {
-         if (char === '(') balance++;
-         else if (char === ')') balance--;
+      // eslint-disable-next-line no-restricted-syntax
+      for (const char of str) {
+         if (char === '(') balance += 1;
+         else if (char === ')') balance -= 1;
          if (balance < 0) return false; // More closing parentheses
       }
       return balance === 0; // Perfectly balanced
@@ -849,6 +900,7 @@ class SolverSanitizeParenthesesInExpression implements ISolver {
 
       for (let i = start; i < str.length; i++) {
          // Skip duplicates
+         // eslint-disable-next-line no-continue
          if (i !== start && str[i] === str[i - 1]) continue;
 
          if (str[i] === '(' && lremove > 0) {
@@ -884,8 +936,8 @@ class SolverFindAllValidMathExpressions implements ISolver {
     */
 
    solve(input: [string, number]): string[] {
-      const digits = input[0];
-      const target = input[1];
+      const digits0 = input[0];
+      const target0 = input[1];
 
       function helper(
          res: string[],
@@ -903,25 +955,25 @@ class SolverFindAllValidMathExpressions implements ISolver {
             return;
          }
          for (let i = pos; i < digits.length; ++i) {
-            if (i != pos && digits[pos] == '0') {
+            if (i !== pos && digits[pos] === '0') {
                break;
             }
-            const cur = parseInt(digits.substring(pos, i + 1));
+            const cur = parseInt(digits.substring(pos, i + 1), 10);
             if (pos === 0) {
                helper(res, path + cur, digits, target, i + 1, cur, cur);
             } else {
-               helper(res, path + '+' + cur, digits, target, i + 1, evaluated + cur, cur);
-               helper(res, path + '-' + cur, digits, target, i + 1, evaluated - cur, -cur);
-               helper(res, path + '*' + cur, digits, target, i + 1, evaluated - multed + multed * cur, multed * cur);
+               helper(res, `${path}+${cur}`, digits, target, i + 1, evaluated + cur, cur);
+               helper(res, `${path}-${cur}`, digits, target, i + 1, evaluated - cur, -cur);
+               helper(res, `${path}*${cur}`, digits, target, i + 1, evaluated - multed + multed * cur, multed * cur);
             }
          }
       }
 
-      if (digits == null || digits.length === 0) {
+      if (digits0 == null || digits0.length === 0) {
          return [];
       }
       const result: string[] = [];
-      helper(result, '', digits, target, 0, 0, 0);
+      helper(result, '', digits0, target0, 0, 0, 0);
       return result;
    }
 }
@@ -948,9 +1000,14 @@ class SolverHammingcodeEncodedIntegerToBinary implements ISolver {
 
       // Calculate parity for each parity bit position
       const parityBitPositions = this.getParityBitPositions(encoded);
-      for (const index of parityBitPositions) {
+
+      // for (const index of parityBitPositions) {
+      //    encoded[index] = this.calculateParity(encoded, index).toString();
+      // }
+
+      parityBitPositions.forEach((index: number): void => {
          encoded[index] = this.calculateParity(encoded, index).toString();
-      }
+      });
 
       // Calculate and set the overall parity bit
       encoded.unshift(this.calculateOverallParity(encoded).toString());
@@ -974,9 +1031,9 @@ class SolverHammingcodeEncodedIntegerToBinary implements ISolver {
 
    private initializeEncodedArray(data: string[], totalParityBits: number): string[] {
       // Initialize encoded array with placeholders for parity bits
-      let encoded = ['x', 'x', ...data.splice(0, 1)];
+      const encoded = ['x', 'x', ...data.splice(0, 1)];
       for (let i = 2; i < totalParityBits; i++) {
-         encoded.push('x', ...data.splice(0, Math.pow(2, i) - 1));
+         encoded.push('x', ...data.splice(0, 2 ** i - 1));
       }
       return encoded;
    }
@@ -992,7 +1049,7 @@ class SolverHammingcodeEncodedIntegerToBinary implements ISolver {
       for (let i = parityIndex; i < encoded.length; i += (parityIndex + 1) * 2) {
          for (let j = i; j < i + parityIndex + 1 && j < encoded.length; j++) {
             if (encoded[j] === '1') {
-               count++;
+               count += 1;
             }
          }
       }
@@ -1007,7 +1064,7 @@ class SolverHammingcodeEncodedIntegerToBinary implements ISolver {
 
 class SolverHammingcodeEncodedBinarytoInteger implements ISolver {
    solve(data: string): number {
-      const binaryArray = data.split('');
+      let binaryArray = data.split('');
       const parityCheckResults = [];
       const totalParityBits = Math.ceil(Math.log2(data.length));
 
@@ -1022,7 +1079,7 @@ class SolverHammingcodeEncodedBinarytoInteger implements ISolver {
       binaryArray.unshift(overallParity);
 
       if (correctedIndex > 0 && !parityCheckResults[0]) {
-         this.toggleBitAtIndex(binaryArray, correctedIndex);
+         binaryArray = this.toggleBitAtIndex(binaryArray, correctedIndex);
       } else if (!parityCheckResults[0]) {
          overallParity = overallParity === '0' ? '1' : '0';
       } else if (parityCheckResults[0] && parityCheckResults.some((truth) => !truth)) {
@@ -1042,7 +1099,7 @@ class SolverHammingcodeEncodedBinarytoInteger implements ISolver {
    }
 
    private checkParityAtIndex(data: string[], index: number): boolean {
-      const parityBitIndex = Math.pow(2, index) - 1;
+      const parityBitIndex = 2 ** index - 1;
       const stepSize = parityBitIndex + 1;
       const parityData = [];
 
@@ -1057,18 +1114,20 @@ class SolverHammingcodeEncodedBinarytoInteger implements ISolver {
    private calculateCorrectionIndex(checkResults: boolean[], totalParityBits: number): number {
       let correctionIndex = 0;
       for (let i = 1; i <= totalParityBits; i++) {
-         correctionIndex += checkResults[i] ? 0 : Math.pow(2, i) / 2;
+         correctionIndex += checkResults[i] ? 0 : 2 ** i / 2;
       }
       return correctionIndex;
    }
 
-   private toggleBitAtIndex(arr: string[], index: number): void {
+   private toggleBitAtIndex(arr0: string[], index: number): string[] {
+      const arr = arr0;
       arr[index] = arr[index] === '0' ? '1' : '0';
+      return arr;
    }
 
    private removeParityBits(arr: string[], totalParityBits: number): void {
       for (let i = totalParityBits; i >= 0; i--) {
-         arr.splice(Math.pow(2, i), 1);
+         arr.splice(2 ** i, 1);
       }
       arr.splice(0, 1); // Remove overall parity bit
    }
@@ -1112,6 +1171,7 @@ class SolverProper2ColoringOfAGraph implements ISolver {
          colors[vertex] = color;
 
          // Check all adjacent vertices
+         // eslint-disable-next-line no-restricted-syntax
          for (const [v1, v2] of graph) {
             if (v1 === vertex || v2 === vertex) {
                const adjacentVertex = v1 === vertex ? v2 : v1;
@@ -1150,10 +1210,10 @@ class SolverCompressionII implements ISolver {
       let i = 0;
       while (i < input.length) {
          // type 1
-         let length = parseInt(input[i]);
-         i++;
+         let length = parseInt(input[i], 10);
+         i += 1;
          if (length > 0) {
-            let data = input.substring(i, i + length);
+            const data = input.substring(i, i + length);
             answer += data;
             i += length;
          }
@@ -1161,11 +1221,11 @@ class SolverCompressionII implements ISolver {
          if (i >= input.length) break;
 
          // type 2
-         length = parseInt(input[i]);
-         i++;
+         length = parseInt(input[i], 10);
+         i += 1;
          if (length > 0) {
-            let offset = parseInt(input[i]);
-            i++;
+            const offset = parseInt(input[i], 10);
+            i += 1;
 
             for (let j = 0; j < length; j++) {
                answer += answer[answer.length - offset];
@@ -1178,48 +1238,55 @@ class SolverCompressionII implements ISolver {
 
 class SolverCompressionIII implements ISolver {
    solve(input: string): string {
-      let cur_state = Array.from(Array(10), () => Array(10).fill(null));
-      let new_state = Array.from(Array(10), () => Array(10));
+      let curState = Array.from(Array(10), () => Array(10).fill(null));
+      let newState = Array.from(Array(10), () => Array(10));
 
       function set(state: string[][], i: number, j: number, str: string) {
          const current = state[i][j];
          if (current == null || str.length < current.length) {
+            // eslint-disable-next-line no-param-reassign
             state[i][j] = str;
          } else if (str.length === current.length && Math.random() < 0.5) {
             // if two strings are the same length, pick randomly so that
             // we generate more possible inputs to Compression II
+            // eslint-disable-next-line no-param-reassign
             state[i][j] = str;
          }
       }
 
       // initial state is a literal of length 1
-      cur_state[0][1] = '';
+      curState[0][1] = '';
 
       for (let i = 1; i < input.length; ++i) {
-         for (const row of new_state) {
+         // for (const row of newState) {
+         //    row.fill(null);
+         // }
+
+         newState.forEach((row: any[]): void => {
             row.fill(null);
-         }
+         });
          const c = input[i];
 
          // handle literals
          for (let length = 1; length <= 9; ++length) {
-            const string = cur_state[0][length];
+            const string = curState[0][length];
             if (string == null) {
+               // eslint-disable-next-line no-continue
                continue;
             }
 
             if (length < 9) {
                // extend current literal
-               set(new_state, 0, length + 1, string);
+               set(newState, 0, length + 1, string);
             } else {
                // start new literal
-               set(new_state, 0, 1, string + '9' + input.substring(i - 9, i) + '0');
+               set(newState, 0, 1, `${string}9${input.substring(i - 9, i)}0`);
             }
 
             for (let offset = 1; offset <= Math.min(9, i); ++offset) {
                if (input[i - offset] === c) {
                   // start new backreference
-                  set(new_state, offset, 1, string + length + input.substring(i - length, i));
+                  set(newState, offset, 1, string + length + input.substring(i - length, i));
                }
             }
          }
@@ -1227,65 +1294,68 @@ class SolverCompressionIII implements ISolver {
          // handle backreferences
          for (let offset = 1; offset <= 9; ++offset) {
             for (let length = 1; length <= 9; ++length) {
-               const string = cur_state[offset][length];
+               const string = curState[offset][length];
                if (string == null) {
+                  // eslint-disable-next-line no-continue
                   continue;
                }
 
                if (input[i - offset] === c) {
                   if (length < 9) {
                      // extend current backreference
-                     set(new_state, offset, length + 1, string);
+                     set(newState, offset, length + 1, string);
                   } else {
                      // start new backreference
-                     set(new_state, offset, 1, string + '9' + offset + '0');
+                     set(newState, offset, 1, `${string}9${offset}0`);
                   }
                }
 
                // start new literal
-               set(new_state, 0, 1, string + length + offset);
+               set(newState, 0, 1, string + length + offset);
 
                // end current backreference and start new backreference
-               for (let new_offset = 1; new_offset <= Math.min(9, i); ++new_offset) {
-                  if (input[i - new_offset] === c) {
-                     set(new_state, new_offset, 1, string + length + offset + '0');
+               for (let newOffset = 1; newOffset <= Math.min(9, i); ++newOffset) {
+                  if (input[i - newOffset] === c) {
+                     set(newState, newOffset, 1, `${string + length + offset}0`);
                   }
                }
             }
          }
 
-         const tmp_state = new_state;
-         new_state = cur_state;
-         cur_state = tmp_state;
+         const tmpState = newState;
+         newState = curState;
+         curState = tmpState;
       }
 
       let result = null;
 
       for (let len = 1; len <= 9; ++len) {
-         let string = cur_state[0][len];
+         let string = curState[0][len];
          if (string == null) {
+            // eslint-disable-next-line no-continue
             continue;
          }
 
          string += len + input.substring(input.length - len, input.length);
          if (result == null || string.length < result.length) {
             result = string;
-         } else if (string.length == result.length && Math.random() < 0.5) {
+         } else if (string.length === result.length && Math.random() < 0.5) {
             result = string;
          }
       }
 
       for (let offset = 1; offset <= 9; ++offset) {
          for (let len = 1; len <= 9; ++len) {
-            let string = cur_state[offset][len];
+            let string = curState[offset][len];
             if (string == null) {
+               // eslint-disable-next-line no-continue
                continue;
             }
 
-            string += len + '' + offset;
+            string += `${len}${offset}`;
             if (result == null || string.length < result.length) {
                result = string;
-            } else if (string.length == result.length && Math.random() < 0.5) {
+            } else if (string.length === result.length && Math.random() < 0.5) {
                result = string;
             }
          }

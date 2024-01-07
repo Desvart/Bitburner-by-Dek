@@ -212,6 +212,7 @@ class ServerHacker {
       this.#ns.print(`[${server.hostname}] Sudo...`);
       this.#ns.nuke(server.hostname);
       this.#ns.print(`[${server.hostname}] Root access granted.`);
+      this.#ns.print(` `);
       return true;
    }
 }
@@ -236,15 +237,17 @@ class ServerSetuper {
    }
 
    copyFilesToServer(targetName: string): void {
-      this.#ns.print(`[${targetName}] Uploading files...`);
-
       const files: string[] = [''];
-      const status: boolean = this.#ns.scp(files, targetName, 'home');
+      if (files.length > 0) {
+         this.#ns.print(`[${targetName}] Uploading files...`);
 
-      if (!status) {
-         this.#ns.print(`[${targetName}] ERROR: File transfer failed!`);
-         return;
+         const status: boolean = this.#ns.scp(files, targetName, 'home');
+
+         if (!status) {
+            this.#ns.print(`[${targetName}] ERROR: File transfer failed!`);
+            return;
+         }
+         this.#ns.print(`[${targetName}] Files uploaded.`);
       }
-      this.#ns.print(`[${targetName}] Files uploaded.`);
    }
 }

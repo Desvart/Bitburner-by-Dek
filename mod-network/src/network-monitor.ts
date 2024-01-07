@@ -48,7 +48,7 @@ class Display {
 
    async build(): Promise<void> {
       await this.injectAnchorInLogWindow();
-      await this.ns.sleep(500);
+      await this.ns.sleep(1000);
       this.injectEmptyContainerBeforeAnchor();
    }
 

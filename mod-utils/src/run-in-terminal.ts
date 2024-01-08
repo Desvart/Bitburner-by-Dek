@@ -1,11 +1,13 @@
 /**
  * This script provide the capability to run any NetScript command or js code directly through the terminal.
  * Very useful when used in combination with an alias: `alias do="run utils/run-in-terminal.js"`.
+ * Do not add spaces in the command instruction!
  *
  * @param {command: string} - The command to run.
  *
  * @example: do 2+3
  * @example: do ns.getServer("foodnstuff")
+ * @example: do ns.ls('home','.exe')
  */
 
 import { NS as INs } from '@ns';

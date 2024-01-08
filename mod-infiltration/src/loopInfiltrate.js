@@ -132,7 +132,7 @@ export async function main(ns) {
   //       when we're done?
   let iargs = ['--start']
   if (args.quiet) iargs.push('--quiet')
-  const pid = ns.run('infiltrate.js', 1, ...iargs)
+  const pid = ns.run('infiltration/infiltrate.daemon.js', 1, ...iargs)
   while (ns.isRunning(pid)) {
     await ns.sleep(250)
   }
@@ -140,13 +140,20 @@ export async function main(ns) {
   wnd = eval('window')
   doc = wnd['document']
 
+   let startTime = performance.now();
   for (let i = 0; i < args.loop; ++i) {
-    await infiltrate(ns, city, target, faction)
+    await infiltrate(ns, city, target, faction, sellInformation);
   }
+   let endTime = performance.now();
+   let executionTime = endTime - startTime; // Time in milliseconds
+   ns.tprint(`Execution time: ${executionTime}ms`);
+
+   ns.run('infiltration/infiltrate.daemon.js', 1, '--stop');
+
   notifyMe('Infiltration loop finished.')
 }
 
-async function infiltrate(ns, city, target, faction) {
+async function infiltrate(ns, city, target, faction, sellInformation) {
   // if (city) {
   // // TODO: Use UI instead of singularity
   //     ns.singularity.travelToCity(city)
@@ -240,9 +247,10 @@ async function findRetry(ns, xpath, expectFailure = false, retries = null) {
 
 function notifyMe(message) {
   // Let's check if the browser supports notifications
-  // if (!("Notification" in window)) {
-  //   alert("This browser does not support desktop notification");
-  // }
+   wnd = eval('window');
+  if (!("Notification" in wnd)) {
+    alert("This browser does not support desktop notification");
+  }
 
   // Let's check if the user is okay to get some notification
   // else

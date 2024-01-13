@@ -5,7 +5,7 @@
    "author": "Desvart",
    "type": "module",
    "scripts": {
-      "transpile-all": "tsc --build tsconfig-glob.json",
+      "transpile-all": "tsc --build",
       "watch:transpile-all": "tsc --build --watch --preserveWatchOutput",
       "watch:post-transpile-all": "node build/out/post-transpilation-cleanup.js dist/ci",
       "watch:build-all": "concurrently -n \"trans,clean\" -c \"magenta,yellow\" \"npm run watch:local-transpile-all\" \"npm run watch:local-sync-all\"",

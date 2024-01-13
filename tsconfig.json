@@ -6,10 +6,12 @@
       { "path": "./mod-utils" },
       { "path": "./mod-network" },
       { "path": "./mod-contracts" },
-      //        { "path": "./mod-hacking" },
+      { "path": "./mod-infiltration" },
+      { "path": "./mod-market" },
+      { "path": "./mod-xp" },
+      { "path": "./mod-hacking" },
+      { "path": "./mod-corporation" },
       //        { "path": "./mod-hacknet" },
-      //        { "path": "./mod-infiltration" },
-      //        { "path": "./mod-stock-market" },
-      //        { "path": "./mod-corporation" },
+
    ]
 }

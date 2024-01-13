@@ -1,0 +1,9 @@
+{
+  "name": "corporation",
+  "version": "Alpha-1.0.0",
+  "scripts": {
+    "transpile": "tsc",
+    "post-transpile": "node ../build/out/post-transpilation-cleanup.js",
+    "build": "npm run transpile && npm run post-transpile"
+  }
+}

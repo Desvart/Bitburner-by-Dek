@@ -4,5 +4,8 @@
   "type": "module",
   "scripts": {
     "transpile": "tsc"
+  },
+  "dependencies": {
+    "convict": "^6.2.4"
   }
 }

@@ -6,7 +6,7 @@
  * Based on script by Zharay (https://github.com/Zharay/BitburnerBotnet/blob/main/corpo.js)
  */
 
-import { NS as INs, Server as INsServer } from '@ns';
+import { AutocompleteData, NS as INs, Server as INsServer } from "@ns";
 
 /** @param {NS} ns */
 export function main(ns: INs): void {
@@ -40,6 +40,10 @@ export function main(ns: INs): void {
    serversToSetup.forEach((server: string): void => {
       new ServerSetuper(ns).setup(server);
    });
+}
+
+export function autocomplete(data: AutocompleteData): string[] {
+   return [...data.servers];
 }
 
 function checkAvailableHackingTools(ns: INs): boolean {
@@ -237,7 +241,7 @@ class ServerSetuper {
    }
 
    copyFilesToServer(targetName: string): void {
-      const files: string[] = [''];
+      const files: string[] = [];
       if (files.length > 0) {
          this.#ns.print(`[${targetName}] Uploading files...`);
 

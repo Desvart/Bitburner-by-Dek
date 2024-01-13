@@ -16,11 +16,15 @@ const FLAGS: [string, boolean][] = [['print', false]];
 
 /** @param {NS} ns */
 export async function main(ns: INs): Promise<void> {
+   ns.tail();
+   ns.disableLog('ALL');
    const flags = ns.flags(FLAGS);
    const path: string[] = [];
    const targetServer: string = (flags._ as string[])[0];
 
    buildPathToServer(ns, '', 'home', targetServer, path);
+
+   ns.print(path.join(' -> '));
 
    const command: string = `${path.join('; connect ')}; backdoor;`;
 
@@ -58,6 +62,7 @@ function buildPathToServer(
       }
 
       if (buildPathToServer(ns, sourceServer, childServer, targetServer, path)) {
+         ns.print(sourceServer);
          path.unshift(sourceServer);
          output = true;
          return;

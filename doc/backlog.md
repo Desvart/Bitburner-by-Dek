@@ -1,7 +1,8 @@
 ## Build module
 * Split two config, one for PROD (Teams) and one for INTG (Firefox)
 * Split the code between the release branch and the dev branch
-* Develop a script to automatically deploy the prod code to the game
+* Add a script in the build folder to copy/update code of specific module from intg to prod folders
+* Develop a script to automatically download the prod code to the game
   https://github.com/moriakaice/bitburner/blob/master/src/initHacking.js
 * Write the README.md file
 

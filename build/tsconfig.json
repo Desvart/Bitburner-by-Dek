@@ -1,6 +1,10 @@
 {
   "extends": "../tsconfig.base.json",
   "include": ["src/*.ts"],
+  "files": [],
+  "references": [
+    { "path": "../resources" }
+  ],
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "out"

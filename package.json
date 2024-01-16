@@ -5,12 +5,11 @@
    "author": "Desvart",
    "type": "module",
    "scripts": {
-      "transpile-all": "tsc --build tsconfig-glob.json",
-      "watch:transpile-all": "tsc --build --watch --preserveWatchOutput",
-      "watch:post-transpile-all": "node build/out/post-transpilation-cleanup.js dist/ci",
-      "watch:build-all": "concurrently -n \"trans,clean\" -c \"magenta,yellow\" \"npm run watch:local-transpile-all\" \"npm run watch:local-sync-all\"",
-      "watch:deploy": "bitburner-filesync",
-      "watch:build-and-deploy": "concurrently -n \"trans,clean,deploy\" -c \"magenta,yellow,green\" \"npm run watch:transpile-all\" \"npm run watch:post-transpile-all\" \"npm run watch:deploy\""
+      "transpile-all": "tsc --build",
+      "watch:all:transpile": "tsc --build --watch --preserveWatchOutput",
+      "watch:all:package-intg": "node build/out/intg-packager.js dist/ci",
+      "watch:all:deploy-intg": "bitburner-filesync",
+      "watch:all:release-intg": "concurrently -n \"trans,clean,deploy\" -c \"magenta,yellow,green\" \"npm run watch:all:transpile\" \"npm run watch:all:package-intg\" \"npm run watch:all:deploy-intg\""
    },
    "dependencies": {
       "chokidar": "latest"

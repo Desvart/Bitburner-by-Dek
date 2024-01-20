@@ -11,7 +11,5 @@
       { "path": "./mod-xp" },
       { "path": "./mod-hacking" },
       { "path": "./mod-corporation" },
-      //        { "path": "./mod-hacknet" },
-
    ]
 }

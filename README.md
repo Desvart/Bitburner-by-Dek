@@ -18,7 +18,7 @@ the same time).
 I fully acknowledge that some of the scripts are overpowered and could be considered by some as cheating since they 
 highly skew the balance difficulty-playability toward nearly no difficulty at all. I do not consider them as cheats 
 since the game itself pushes the player to hack as much as possible, even outside the "normal" framework of the game.
-For the sake of transparency, I have flagged these scripts in the description below with the tag "[OP]".
+For the sake of transparency, I have flagged these scripts in the description below with the tag "**[OP]**".
 
 ## Repository structure
 The repository contains 4 types of modules:
@@ -35,8 +35,11 @@ Download the content of the `dist/prod` folder and copy/paste the content of eac
 Then, create the following aliases:
 ```
 alias do='run utils/run-in-terminal.js';
-alias buy='run utils/buy-items.js';
-alias del='run utils/delete-remote-files.js';
+alias buyDarkweb='run utils/buy-from-darkweb.js';
+alias buyServer='run utils/buy-custom-server.js';
+alias del='run utils/cleanup-server.js';
+alias warp='run utils/warp-time.js';
+alias bootstrap='run utils/bootstrap-new-iteration.js';
 ```
 
 ### For players that develop in an external IDE
@@ -48,11 +51,17 @@ Clone the full repository into your IDE and follow the instructions in `build/RE
 ### mod-utils
 This module contains various utility scripts not specifically related to a specific mechanic. This module contains 3 
 capabilities:
-* buying items even without the singularity  
-  Command: `buy --tor`, `buy --portBypass`, `buy --formulas`, `buy --server <ram>`
+* buying items from the Darkweb even without the singularity  
+  Command: `buyDarkweb --tor --portBypass --formulas --all --logs`
+* buying custom servers
+  Command: `buyServer <name> <ram> --logs`
 * delete remote files easily  
-  Command: `del <targets>`, `del --all`
+  Command: `del <targets>`, `del --home --deleteContracts --logs`
 * run any javascript instruction (even with ns) directly in the terminal (do not put spaces in the code)  
   Command: `do <code>`
+* **[OP]** "warping" time by fast forwarding days into the future or by speeding up the time flow
+  Command: `warp --days <days> --speed <speed> --reset --status`
+* **[OP]** bootstrap a new game iteration by highly raising the player's combat stats and money
+  Command: `bootstrap`
 
 

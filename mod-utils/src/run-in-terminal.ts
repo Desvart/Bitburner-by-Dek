@@ -14,11 +14,18 @@ import { NS as INs } from '@ns';
 
 /** @param {NS} ns */
 export async function main(ns: INs): Promise<void> {
-   const { args } = ns;
+   const args: string[] = ns.args as string[];
    if (args.length === 0) {
-      ns.tprint('You must run this script with an argument that is the code to run.');
+      ns.tprint('ERROR - You must run this script with an argument that is the code to run.');
       return;
    }
+
+   args.forEach((arg: string): void => {
+      if (arg.length === 1 && arg === ',') {
+         ns.tprint('ERROR - You must not add spaces in the command instruction.');
+         ns.exit();
+      }
+   });
 
    const command: string = String(args.join(''));
    const script: string = `

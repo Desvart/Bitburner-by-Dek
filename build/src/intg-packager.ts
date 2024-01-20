@@ -74,11 +74,13 @@ class Watcher {
 }
 
 class ImportFixer {
-   #importRegex: RegExp = /import\s+({[^}]*})\s+from\s+['"]\/mod-(.*?)\/src\/(.*?)['"];/g;
+   #importModRegex: RegExp = /import\s+({[^}]*})\s+from\s+['"]\/mod-(.*?)\/src\/(.*?)['"];/g;
+   #importResRegex: RegExp = /import\s+({[^}]*})\s+from\s+['"]\/resources\/src\/(.*?)['"]';/g;
 
    fixImportPaths(fileCiPath: string): string {
       const originalFileContent: string = fs.readFileSync(fileCiPath, 'utf8');
-      return originalFileContent.replace(this.#importRegex, 'import $1 from "/$2/$3";');
+      const fileContentFix1: string = originalFileContent.replace(this.#importModRegex, 'import $1 from "/$2/$3";');
+      return fileContentFix1.replace(this.#importResRegex, 'import $1 from "/resources/$2";');
    }
 }
 

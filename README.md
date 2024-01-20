@@ -59,9 +59,9 @@ capabilities:
   Command: `del <targets>`, `del --home --deleteContracts --logs`
 * run any javascript instruction (even with ns) directly in the terminal (do not put spaces in the code)  
   Command: `do <code>`
-* **[OP]** "warping" time by fast forwarding days into the future or by speeding up the time flow
+* **[OP]** "warping" time by fast forwarding days into the future or by speeding up the time flow  
   Command: `warp --days <days> --speed <speed> --reset --status`
-* **[OP]** bootstrap a new game iteration by highly raising the player's combat stats and money
+* **[OP]** bootstrap a new game iteration by highly raising the player's combat stats and money  
   Command: `bootstrap`
 
 

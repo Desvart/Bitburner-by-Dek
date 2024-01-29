@@ -14,7 +14,7 @@ export async function main(ns: INs): Promise<void> {
    await pageManipulator.securedClick("//span[@aria-label = 'FoodNStuff']");
    await pageManipulator.securedClick("//button[contains(., 'Apply to be an Employee')]");
    await ns.sleep(500);
-   await pageManipulator.securedClick('/html/body/div[2]/div[3]/button');
+   await pageManipulator.securedClick("//span[contains(., 'Congratulation')]/ancestor::div/button");
    await ns.sleep(500);
    await pageManipulator.securedClick("//button[contains(., 'Work')]");
    await pageManipulator.securedClick("//button[contains(., 'Do something else simultaneously')]");
@@ -25,13 +25,13 @@ export async function main(ns: INs): Promise<void> {
    await pageManipulator.securedClick("//button[contains(., 'Focus')]");
    await pageManipulator.securedClick("//button[contains(., 'Stop working')]");
    await ns.sleep(500);
-   await pageManipulator.securedClick('/html/body/div[2]/div[3]/button');
+   await pageManipulator.securedClick("//span[contains(., 'finished working')]/ancestor::div/button");
    await ns.sleep(500);
    await pageManipulator.securedClick("//button[contains(., 'Quit')]");
-   await pageManipulator.securedClick("/html/body/div[2]//button[contains(., 'Quit')]");
+   await pageManipulator.securedClick("//button[1][contains(., 'Quit')]");
    await pageManipulator.securedClick("//button[@aria-label = 'save game']");
    await ns.sleep(1000);
    pageManipulator.refreshPage();
-   await ns.sleep(1000);
-   await pageManipulator.securedClick('/html/body/div[2]/div[3]/button');
+   await ns.sleep(2000);
+   await pageManipulator.securedClick("//span[contains(., 'Offline for')]/ancestor::div/button");
 }

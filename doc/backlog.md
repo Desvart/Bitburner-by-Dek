@@ -35,8 +35,6 @@
 
 ## Utils module
 * Build an improved HUD
-* FIX [buy-tor-and-worms] for some unknown mechanics, the tor router is created only once the buying script has been 
-released. Therefore, once the router bought and before to buy the worms, we need to kill the script and launch another.
 * Adapt alias command to not display log but with --log option but to pop an error if needed.
 * Add a script to download all the scripts from the GitHub repository to the game itself (and set up the aliased on the 
   fly)

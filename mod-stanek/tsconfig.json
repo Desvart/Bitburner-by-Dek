@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.base.json",
+  "include": ["src/*.ts"],
+  "files": [],
+  "references": [
+    { "path": "../resources" }
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "../dist/ci/stanek",
+    "tsBuildInfoFile": "../build/cache/stanek.tsbuildinfo"
+  }
+}

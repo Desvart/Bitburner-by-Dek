@@ -7,6 +7,7 @@
   ],
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "../dist/ci/hacking"
+    "outDir": "../dist/ci/hacking",
+    "tsBuildInfoFile": "../build/cache/hacking.tsbuildinfo"
   }
 }

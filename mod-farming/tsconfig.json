@@ -3,10 +3,12 @@
   "include": ["src/*.ts"],
   "files": [],
   "references": [
-    { "path": "../resources" }
+    { "path": "../resources"},
+    { "path": "../mod-utils"}
   ],
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "../dist/ci/xp"
+    "outDir": "../dist/ci/xp",
+    "tsBuildInfoFile": "../build/cache/xp.tsbuildinfo"
   }
 }

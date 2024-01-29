@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.base.json",
+  "include": ["src/**/*.ts"],
+  "files": [],
+  "references": [
+    { "path": "../resources" },
+    { "path": "../mod-utils" }
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "../dist/ci/carbon",
+    "tsBuildInfoFile": "../build/cache/carbon.tsbuildinfo"
+  }
+}

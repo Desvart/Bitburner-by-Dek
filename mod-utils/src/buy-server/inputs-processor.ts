@@ -21,7 +21,7 @@ export class InputsProcessor {
    constructor(ns: INs) {
       this.#ns = ns;
       const args: FlagType = ns.flags(InputsProcessor.argsSchema);
-      this.nsConsole = new NsConsole(ns, args.logs as boolean);
+      this.nsConsole = new NsConsole(ns, 'Server purchase', args.logs as boolean);
 
       const serverConfig: [string, string | number] = args._ as [string, string | number];
       [this.serverName, this.ramSize] = this.checkServerConfigurationValidity(serverConfig);

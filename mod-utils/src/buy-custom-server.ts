@@ -20,13 +20,25 @@ export function autocomplete(data: AutocompleteData, args: string[]): string[] {
 export async function main(ns: INs): Promise<void> {
    const { serverName, ramSize, operation, nsConsole } = new InputsProcessor(ns);
 
-   if (operation === Operation.BUY)
+   if (operation === Operation.BUY) {
+      const cost: number = ns.getPurchasedServerCost(ramSize);
+      if (cost > ns.getServerMoneyAvailable('home')) {
+         nsConsole.log(`Server purchase: FAILED - Not enough money to purchase server (${cost} $)`);
+         return;
+      }
       ns.purchaseServer(serverName, ramSize) === ''
          ? nsConsole.log(`Server purchase: FAILED`)
          : nsConsole.log(`Server purchase: SUCCESS (${serverName}, ${ramSize})`);
+   }
 
-   if (operation === Operation.UPGRADE)
+   if (operation === Operation.UPGRADE) {
+      const cost: number = ns.getPurchasedServerUpgradeCost(serverName, ramSize);
+      if (cost > ns.getServerMoneyAvailable('home')) {
+         nsConsole.log(`Server upgrade: FAILED - Not enough money to purchase upgrade (${cost} $))`);
+         return;
+      }
       ns.upgradePurchasedServer(serverName, ramSize)
          ? nsConsole.log(`Server upgrade: SUCCESS (${serverName}, ${ramSize})`)
          : nsConsole.log(`Server upgrade: FAILED`);
+   }
 }

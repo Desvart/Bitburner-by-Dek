@@ -4,6 +4,7 @@
   "files": [],
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "out"
+    "outDir": "out",
+    "tsBuildInfoFile": "../build/cache/build.tsbuildinfo"
   }
 }

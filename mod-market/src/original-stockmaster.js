@@ -1,14 +1,14 @@
 import {
   instanceCount, getConfiguration, getNsDataThroughFile, runCommand, getActiveSourceFiles, tryGetBitNodeMultipliers,
   formatMoney, formatNumberShort, formatDuration, getStockSymbols
-} from './helpers.js'
+} from '/market/original-helpers.js'
 
 let disableShorts = false;
 let commission = 100000; // Buy/sell commission. Expected profit must exceed this to buy anything.
 let totalProfit = 0.0; // We can keep track of how much we've earned since start.
 let lastLog = ""; // We update faster than the stock-market ticks, but we don't log anything unless there's been a change
 let allStockSymbols = null; // Stores the set of all symbols collected at start
-let mock = false; // If set to true, will "mock" buy/sell but not actually buy/sell anythingorecast
+let mock = false; // If set to true, will "mock" buy/sell but not actually buy/sell anything
 let noisy = false; // If set to true, tprints and announces each time stocks are bought/sold
 let dictSourceFiles; // Populated at init, a dictionary of source-files the user has access to, and their level
 // Pre-4S configuration (influences how we play the stock market before we have 4S data, after which everything's fool-proof)
@@ -18,7 +18,7 @@ let longTermForecastWindowLength; // This much history will be used to determine
 let nearTermForecastWindowLength; // This much history will be used to detect recent negative trends and act on them immediately.
 // The following pre-4s constants are hard-coded (not configurable via command line) but may require tweaking
 const marketCycleLength = 75; // Every this many ticks, all stocks have a 45% chance of "reversing" their probability. Something we must detect and act on quick to not lose profits.
-const maxTickHistory = 151; // This much history will be kept for purposes of detemining volatility and perhaps one day pinpointing the market cycle tick
+const maxTickHistory = 151; // This much history will be kept for purposes of determining volatility and perhaps one day pinpointing the market cycle tick
 const inversionDetectionTolerance = 0.10; // If the near-term forecast is within this distance of (1 - long-term forecast), consider it a potential "inversion"
 const inversionLagTolerance = 5; // An inversion is "trusted" up to this many ticks after the normal nearTermForecastWindowLength expected detection time
 // (Note: 33 total stocks * 45% inversion chance each cycle = ~15 expected inversions per cycle)

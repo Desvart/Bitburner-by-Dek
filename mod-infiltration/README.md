@@ -33,3 +33,11 @@ The infiltrate-daemon.js script is based on the work of
 
 The loopInfiltration.js script is based on the work of 
 [akelopes](https://github.com/akelopes/bitburner_scripts/blob/master/src/loopInfiltrate.js).
+
+
+### mod-infiltration [OP]
+This module contains all the scripts related to the infiltration mechanic. This module contains two capabilities:
+* Fully automating the resolution of a single infiltration mission once you reach the first infiltration screen.   
+  Command: `run infiltration/infiltrate.daemon.js`
+* Automatically repeating automated infiltration missions to gain money or reputation depending on the player choice.  
+  Command: `spy --money --target <target>`, `spy --faction <faction> --target <target>`

@@ -3,11 +3,12 @@
   "include": ["src/**/*.ts"],
   "files": [],
   "references": [
-    { "path": "../resources" }
+    { "path": "../resources" },
+    { "path": "../mod-utils" }
   ],
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "../dist/ci/utils",
-    "tsBuildInfoFile": "../build/cache/utils.tsbuildinfo"
+    "outDir": "../dist/ci/carbon",
+    "tsBuildInfoFile": "../build/cache/carbon.tsbuildinfo"
   }
 }

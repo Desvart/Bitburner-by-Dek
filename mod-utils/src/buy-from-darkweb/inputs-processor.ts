@@ -18,7 +18,7 @@ export class InputsProcessor {
 
    constructor(ns: INs) {
       const args: FlagType = ns.flags(InputsProcessor.argsSchema);
-      this.nsConsole = new NsConsole(ns, args.logs as boolean);
+      this.nsConsole = new NsConsole(ns, 'Darkweb purchase', args.logs as boolean);
 
       this.purchaseTorRouter = args.tor as boolean;
       this.purchasePortBypass = args.portBypass as boolean;

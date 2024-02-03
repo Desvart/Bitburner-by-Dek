@@ -8,8 +8,12 @@
       { "path": "./mod-contracts" },
       { "path": "./mod-infiltration" },
       { "path": "./mod-market" },
-      { "path": "./mod-xp" },
+      { "path": "./mod-farming" },
       { "path": "./mod-hacking" },
       { "path": "./mod-corporation" },
+      { "path": "./mod-sleeve"},
+      { "path": "./mod-hacknet" },
+      { "path": "./mod-exploit" },
+      { "path": "./mod-stanek" }
    ]
 }

@@ -3,6 +3,8 @@
  * Very useful when used in combination with an alias: `alias do="run utils/run-in-terminal.js"`.
  * Do not add spaces in the command instruction!
  *
+ * Author: Derek Svart <https://github.com/Desvart>
+ *
  * @param {command: string} - The command to run.
  *
  * @example: do 2+3

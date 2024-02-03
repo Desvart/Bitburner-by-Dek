@@ -1,13 +1,13 @@
 {
   "extends": "../tsconfig.base.json",
-  "include": ["src/**/*.ts"],
+  "include": ["src/*.ts"],
   "files": [],
   "references": [
     { "path": "../resources" }
   ],
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "../dist/ci/utils",
-    "tsBuildInfoFile": "../build/cache/utils.tsbuildinfo"
+    "outDir": "../dist/ci/network",
+    "tsBuildInfoFile": "../build/cache/network.tsbuildinfo"
   }
 }

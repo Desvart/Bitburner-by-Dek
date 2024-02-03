@@ -137,7 +137,7 @@ function adjustSchedule(jobs = []) {
    let startTimeAdjustment = performance.now() - earliestStartTime;
    if (startTimeAdjustment > 0) {
       startTimeAdjustment += 100;
-      console.log(`Adjusting start time by ${startTimeAdjustment}`);
+      //console.log(`Adjusting start time by ${startTimeAdjustment}`);
       for (const job of jobs) {
          if ('startTime' in job) {
             job.startTime += startTimeAdjustment;
